@@ -5,6 +5,36 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgba(155, 252, 136, 0.411);
+}
+
+.loading-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+}
+
+.loading-icon {
+  width: 120px;
+  height: 120px;
+  background-image: url('./1024px-Coronavirus_icon.svg.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.left-icon {
+  animation: updown 0.3s infinite alternate;
+}
+
+.right-icon {
+  animation: updown 0.3s infinite alternate-reverse;
+}
+
+@keyframes updown {
+  to {
+      transform:translateY(-40px);
+  }
 }
 
 code {

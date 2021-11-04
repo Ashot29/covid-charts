@@ -1,26 +1,31 @@
-import { useEffect } from 'react';
-import './App.css';
-
-const BASE_URL = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/covid-19-qppza/service/REST-API/incoming_webhook';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCountries } from "./stateManagement/actions/actionCreators/countriesActionCreator";
+import { RootState } from "./stateManagement/reducers/rootReducer";
+import DataTable from "./components/countriesTable/index";
+import "./App.css";
 
 function App() {
+  const isLoading = useSelector((state: RootState) => state.countries.loading);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetch(`${BASE_URL}/metadata`)
-    .then(resp => resp.json())
-    .then(data => console.log(data, 'metadata'))
-
-    fetch(`${BASE_URL}/global?country_iso3=USA&min_date=2021-11-01T00:00:00.000Z&max_date=2021-11-02T00:00:00.000Z`) // for one country every days since 22.01.21
-    .then(resp => resp.json())
-    .then(data => console.log((data), 'global?country_iso3=USA'))
-
-    fetch(`${BASE_URL}/countries_summary?min_date=2021-11-01T00:00:00.000Z&max_date=2021-11-02T00:00:00.000Z`) // countrie summaries
-    .then(resp => resp.json())
-    .then(data => console.log(data, 'global'))
+    dispatch(getAllCountries());
   }, []);
-  
+
+  if (isLoading)
+    return (
+      <div className="loading-icon-wrapper">
+        <div className="loading-icon left-icon"></div>
+        <div className="loading-icon right-icon"></div>
+      </div>
+    );
+
   return (
-    <div>
-      Ashot
+    <div className="app">
+      <div className="container">
+        <DataTable />
+      </div>
     </div>
   );
 }
