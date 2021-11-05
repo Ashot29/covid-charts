@@ -1,17 +1,33 @@
 .table-cell-span {
     display: flex;
-    cursor: pointer;
+    width: max-content;
 }
 
 .table-cell-span > span {
     margin-left: 5px;
 }
 
+.country-cell {
+    color: rgba(55, 55, 131, 0.849);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .header-cell {
     font-size: 24px;
     font-weight: 400;
+    cursor: pointer;
 }
 
-.table-cell-span:hover {
+.header-cell:hover {
     text-decoration: underline;
+}
+
+.country-cell:hover {
+    color: rgba(9, 9, 82, 0.849);
+    text-decoration: none;
+}
+
+.table-cell-content {
+    display: flex;
 }

@@ -28,7 +28,7 @@ const sortTypes: any = {
   },
   newDeaths: {
     fn: (a: ICountry, b: ICountry) => b.deaths_daily - a.deaths_daily,
-  }
+  },
 };
 
 export default function CountriesTable() {
@@ -50,52 +50,74 @@ export default function CountriesTable() {
               <span>#</span>
             </TableCell>
             <TableCell>
-              <span
-                className="table-cell-span header-cell"
-                data-name="countryName"
-                onClick={changeSortState}
-              >
-                Country{" "}
+              <div className="table-cell-content">
+                <span
+                  className="table-cell-span header-cell"
+                  data-name="countryName"
+                  onClick={changeSortState}
+                >
+                  Country{" "}
+                </span>
                 <span>
                   <SortIcon />
                 </span>
-              </span>
+              </div>
             </TableCell>
             <TableCell>
-              <span
-                className="table-cell-span header-cell"
-                data-name="totalCases"
-                onClick={changeSortState}
-              >
-                Total Cases{" "}
+              <div className="table-cell-content">
+                <span
+                  className="table-cell-span header-cell"
+                  data-name="totalCases"
+                  onClick={changeSortState}
+                >
+                  Total Cases{" "}
+                </span>
                 <span>
                   <SortIcon />
                 </span>
-              </span>
+              </div>
             </TableCell>
             <TableCell>
-              <span className="table-cell-span header-cell" data-name="newCases" onClick={changeSortState}>
-                New Cases{" "}
+              <div className="table-cell-content">
+                <span
+                  className="table-cell-span header-cell"
+                  data-name="newCases"
+                  onClick={changeSortState}
+                >
+                  New Cases{" "}
+                </span>
                 <span>
                   <SortIcon />
                 </span>
-              </span>
+              </div>
             </TableCell>
             <TableCell>
-              <span className="table-cell-span header-cell" data-name='totalDeaths' onClick={changeSortState}>
-                Total Deaths{" "}
+              <div className="table-cell-content">
+                <span
+                  className="table-cell-span header-cell"
+                  data-name="totalDeaths"
+                  onClick={changeSortState}
+                >
+                  Total Deaths{" "}
+                </span>
                 <span>
                   <SortIcon />
                 </span>
-              </span>
+              </div>
             </TableCell>
             <TableCell>
-              <span className="table-cell-span header-cell" data-name='newDeaths' onClick={changeSortState}>
-                New Deaths{" "}
+              <div className="table-cell-content">
+                <span
+                  className="table-cell-span header-cell"
+                  data-name="newDeaths"
+                  onClick={changeSortState}
+                >
+                  New Deaths{" "}
+                </span>
                 <span>
                   <SortIcon />
                 </span>
-              </span>
+              </div>
             </TableCell>
           </TableRow>
         </TableHead>
@@ -111,7 +133,9 @@ export default function CountriesTable() {
                   <span>{index + 1}</span>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <span className="table-cell-span">{country.country}</span>
+                  <span className="table-cell-span country-cell">
+                    {country.country}
+                  </span>
                 </TableCell>
                 <TableCell>
                   <span className="table-cell-span">{country.confirmed}</span>

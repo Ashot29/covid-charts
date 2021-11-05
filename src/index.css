@@ -18,7 +18,7 @@ body {
 .loading-icon {
   width: 120px;
   height: 120px;
-  background-image: url('./1024px-Coronavirus_icon.svg.png');
+  background-image: url('./assets/images/1024px-Coronavirus_icon.svg.png');
   background-size: contain;
   background-repeat: no-repeat;
 }
