@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCountries } from "./stateManagement/actions/actionCreators/countriesActionCreator";
 import { RootState } from "./stateManagement/reducers/rootReducer";
-import DataTable from "./components/countriesTable/index";
+import CountriesTable from "./components/countriesTable/index";
 import "./App.css";
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="app">
       <div className="container">
-        <DataTable />
+        <CountriesTable />
       </div>
     </div>
   );

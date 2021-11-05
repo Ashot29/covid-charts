@@ -1,60 +1,73 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../stateManagement/reducers/rootReducer';
+import * as React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { useSelector } from "react-redux";
+import { RootState } from "../../stateManagement/reducers/rootReducer";
+import { ICountry } from "./../../stateManagement/reducers/countriesReducer";
+import SortIcon from '@mui/icons-material/Sort';
+import "./index.css";
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-export default function DataTable() {
-  const countries = useSelector((state: RootState) => state.countries.countries)
+export default function CountriesTable() {
+  const countries = useSelector(
+    (state: RootState) => state.countries.countries
+  );
 
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Country</TableCell>
-            <TableCell align="right">Total Cases</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>
+              <span>#</span>
+            </TableCell>
+            <TableCell>
+              <span className="table-cell-span header-cell">Country <span><SortIcon /></span></span>
+            </TableCell>
+            <TableCell>
+              <span className="table-cell-span header-cell">Total Cases <span><SortIcon /></span></span>
+            </TableCell>
+            <TableCell>
+              <span className="table-cell-span header-cell">New Cases <span><SortIcon /></span></span>
+            </TableCell>
+            <TableCell>
+              <span className="table-cell-span header-cell">Total Deaths <span><SortIcon /></span></span>
+            </TableCell>
+            <TableCell>
+              <span className="table-cell-span header-cell">New Deaths <span><SortIcon /></span></span>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {countries.map((country: ICountry, index: number) => (
             <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              key={country.country}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
-                {row.name}
+              <TableCell>
+                <span>{index + 1}</span>
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell component="th" scope="row">
+                <span className="table-cell-span">{country.country}</span>
+              </TableCell>
+              <TableCell>
+                <span className="table-cell-span">{country.confirmed}</span>
+              </TableCell>
+              <TableCell>
+                <span className="table-cell-span">
+                  {country.confirmed_daily}
+                </span>
+              </TableCell>
+              <TableCell>
+                <span className="table-cell-span">{country.deaths}</span>
+              </TableCell>
+              <TableCell>
+                <span className="table-cell-span">{country.deaths_daily}</span>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

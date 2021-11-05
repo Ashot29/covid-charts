@@ -1,8 +1,15 @@
 import { BASE_URL } from "../constants/urls";
 
 export const fetchAllCountries = () => {
+  let today: any = new Date();
+  let yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
+  let dd = String(yesterday.getDate()).padStart(2, "0");
+  let mm = String(yesterday.getMonth() + 1).padStart(2, "0");
+  let yyyy = yesterday.getFullYear();
+  today = yyyy + '-' + mm + '-' + dd;
   return fetch(
-    `${BASE_URL}/countries_summary?min_date=2021-11-03T00:00:00.000Z&hide_fields=uids,country_iso2s,country_iso3s,country_codes,combined_names`
+    `${BASE_URL}/countries_summary?min_date=2021-11-04T00:00:00.000Z&hide_fields=uids,country_iso2s,country_iso3s,country_codes,combined_names`
   ).then((resp) => resp.json());
 };
 

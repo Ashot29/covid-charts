@@ -1,0 +1,17 @@
+.table-cell-span {
+    display: flex;
+    cursor: pointer;
+}
+
+.table-cell-span > span {
+    margin-left: 5px;
+}
+
+.header-cell {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.table-cell-span:hover {
+    text-decoration: underline;
+}
