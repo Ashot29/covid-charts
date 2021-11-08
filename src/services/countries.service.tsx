@@ -7,9 +7,28 @@ export const fetchAllCountries = () => {
   let dd = String(yesterday.getDate()).padStart(2, "0");
   let mm = String(yesterday.getMonth() + 1).padStart(2, "0");
   let yyyy = yesterday.getFullYear();
-  today = yyyy + '-' + mm + '-' + dd;
+  today = yyyy + "-" + mm + "-" + dd;
   return fetch(
     `${BASE_URL}/countries_summary?min_date=${today}T00:00:00.000Z&hide_fields=uids,country_iso2s,country_iso3s,country_codes,combined_names`
+  ).then((resp) => resp.json());
+};
+
+export const fetchCurrentCountryData = (countryName: string) => {
+  return fetch(`${BASE_URL}/countries_summary?country=${countryName}`).then(
+    (resp) => resp.json()
+  );
+};
+
+export const fetchCurrentCountryInfo = (country: string) => {
+  let today: any = new Date();
+  let yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
+  let dd = String(yesterday.getDate()).padStart(2, "0");
+  let mm = String(yesterday.getMonth() + 1).padStart(2, "0");
+  let yyyy = yesterday.getFullYear();
+  today = yyyy + "-" + mm + "-" + dd;
+  return fetch(
+    `${BASE_URL}/countries_summary?country=${country}&min_date=${today}T00:00:00.000Z&hide_fields=uids,country_iso2s,country_iso3s,country_codes,combined_names`
   ).then((resp) => resp.json());
 };
 
@@ -26,6 +45,6 @@ export const fetchAllCountries = () => {
 // .then(resp => resp.json())
 // .then(data => console.log(data, 'France data since some date.'))
 
-// fetch(`${BASE_URL}/countries_summary?country=France&min_date=2021-11-03T00:00:00.000Z`) // countrie summaries since covid start
+// fetch(`${BASE_URL}/countries_summary?country=France&max_date=2021-11-03T00:00:00.000Z`) // countrie summaries since covid start
 // .then(resp => resp.json())
 // .then(data => console.log(data, 'France summary for yesterday')) &hide_fields=uids,country_iso2s,country_iso3s,country_codes,combined_names

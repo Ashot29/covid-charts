@@ -8,20 +8,11 @@ import CountryChart from "./components/countryChart";
 import "./App.css";
 
 function App() {
-  const isLoading = useSelector((state: RootState) => state.countries.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllCountries());
   }, []);
-
-  if (isLoading)
-    return (
-      <div className="loading-icon-wrapper">
-        <div className="loading-icon left-icon"></div>
-        <div className="loading-icon right-icon"></div>
-      </div>
-    );
 
   return (
     <BrowserRouter>
@@ -29,7 +20,7 @@ function App() {
         <div className="container">
           <Switch>
             <Route component={CountriesTable} exact path="/" />
-            <Route component={CountryChart} exact path='/:id' />
+            <Route component={CountryChart} exact path="/:country" />
           </Switch>
         </div>
       </div>

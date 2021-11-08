@@ -6,12 +6,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../stateManagement/reducers/rootReducer";
 import { ICountry } from "./../../stateManagement/reducers/countriesReducer";
 import SortIcon from "@mui/icons-material/Sort";
 import "./index.css";
 import { Link } from "react-router-dom";
+import { setCountryAsCurrent } from "./../../stateManagement/actions/actionCreators/currentCountryActionCreator";
 
 const sortTypes: any = {
   totalCases: {
@@ -33,14 +34,32 @@ const sortTypes: any = {
 };
 
 export default function CountriesTable(): JSX.Element {
+  const dispatch = useDispatch();
   const [sortState, setSortState] = React.useState("totalCases");
   const countries = useSelector(
     (state: RootState) => state.countries.countries
   );
+  const isLoading = useSelector((state: RootState) => state.countries.loading);
+
+  function setCurrentCountry(id: string) {
+    dispatch(
+      setCountryAsCurrent(
+        countries.find((country: ICountry) => country._id === id)
+      )
+    );
+  }
 
   function changeSortState(event: any) {
     setSortState(event.target.dataset.name);
   }
+
+  if (isLoading)
+    return (
+      <div className="loading-icon-wrapper">
+        <div className="loading-icon left-icon"></div>
+        <div className="loading-icon right-icon"></div>
+      </div>
+    );
 
   return (
     <TableContainer component={Paper}>
@@ -134,8 +153,14 @@ export default function CountriesTable(): JSX.Element {
                   <span>{index + 1}</span>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <span className="table-cell-span country-cell">
-                    <Link to={`${country._id}`}>{country.country}</Link>
+                  <span className="table-cell-span">
+                    <Link
+                      className="country-cell"
+                      to={`${country.country}`}
+                      onClick={() => setCurrentCountry(country._id)}
+                    >
+                      {country.country}
+                    </Link>
                   </span>
                 </TableCell>
                 <TableCell>
