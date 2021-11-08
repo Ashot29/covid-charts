@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllCountries } from "./stateManagement/actions/actionCreators/countriesActionCreator";
 import { RootState } from "./stateManagement/reducers/rootReducer";
 import CountriesTable from "./components/countriesTable/index";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import CountryChart from "./components/countryChart/index";
 import "./App.css";
 
@@ -24,16 +24,16 @@ function App() {
     );
 
   return (
-    <Router>
+    <BrowserRouter>
       <div className="app">
         <div className="container">
-          <Routes>
-            {/* <Route exact path="/" component={CountriesTable} />
-            <Route path="/:id" component={CountryChart} /> */}
-          </Routes>
+          <Switch>
+            <Route component={CountriesTable} exact path="/" />
+            <Route component{CountryChart} exact path='/:id' />
+          </Switch>
         </div>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 export default App;
