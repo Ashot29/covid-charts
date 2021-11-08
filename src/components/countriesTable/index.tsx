@@ -11,6 +11,7 @@ import { RootState } from "../../stateManagement/reducers/rootReducer";
 import { ICountry } from "./../../stateManagement/reducers/countriesReducer";
 import SortIcon from "@mui/icons-material/Sort";
 import "./index.css";
+import { Link } from "react-router-dom";
 
 const sortTypes: any = {
   totalCases: {
@@ -31,7 +32,7 @@ const sortTypes: any = {
   },
 };
 
-export default function CountriesTable() {
+export default function CountriesTable(): JSX.Element {
   const [sortState, setSortState] = React.useState("totalCases");
   const countries = useSelector(
     (state: RootState) => state.countries.countries
@@ -134,7 +135,7 @@ export default function CountriesTable() {
                 </TableCell>
                 <TableCell component="th" scope="row">
                   <span className="table-cell-span country-cell">
-                    {country.country}
+                    <Link to={`${country._id}`}>{country.country}</Link>
                   </span>
                 </TableCell>
                 <TableCell>

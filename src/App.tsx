@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCountries } from "./stateManagement/actions/actionCreators/countriesActionCreator";
 import { RootState } from "./stateManagement/reducers/rootReducer";
-import CountriesTable from "./components/countriesTable/index";
+import CountriesTable from "./components/countriesTable";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import CountryChart from "./components/countryChart/index";
+import CountryChart from "./components/countryChart";
 import "./App.css";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
         <div className="container">
           <Switch>
             <Route component={CountriesTable} exact path="/" />
-            <Route component{CountryChart} exact path='/:id' />
+            <Route component={CountryChart} exact path='/:id' />
           </Switch>
         </div>
       </div>
