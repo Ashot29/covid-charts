@@ -30,7 +30,10 @@ export const getAllCountries = () => {
   return (dispatch: AppDispatch) => {
     dispatch(loadingStart());
     fetchAllCountries()
-    .then((data) => dispatch(setCountries(data)))
+    .then((data) => {
+      if (data.length === 0) console.log(0)
+      dispatch(setCountries(data))
+    })
     .catch(error => dispatch(loadingFailure(error)))
   };
 };

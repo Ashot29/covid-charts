@@ -1,7 +1,7 @@
 import { BASE_URL } from "../constants/urls";
 
 export const fetchAllCountries = () => {
-  let today: any = new Date();
+  let today: Date | string = new Date();
   let yesterday = new Date();
   yesterday.setDate(today.getDate() - 1);
   let dd = String(yesterday.getDate()).padStart(2, "0");
@@ -14,13 +14,13 @@ export const fetchAllCountries = () => {
 };
 
 export const fetchCurrentCountryData = (countryName: string) => {
-  return fetch(`${BASE_URL}/countries_summary?country=${countryName}`).then(
-    (resp) => resp.json()
-  );
+  return fetch(
+    `${BASE_URL}/countries_summary?country=${countryName}&hide_fields=uids,country_iso2s,country_iso3s,country_codes,combined_names`
+  ).then((resp) => resp.json());
 };
 
 export const fetchCurrentCountryInfo = (country: string) => {
-  let today: any = new Date();
+  let today: Date | string = new Date();
   let yesterday = new Date();
   yesterday.setDate(today.getDate() - 1);
   let dd = String(yesterday.getDate()).padStart(2, "0");
